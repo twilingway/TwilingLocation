@@ -1,9 +1,11 @@
 import {
   Pressable,
+  StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
   View,
+  ViewStyle,
 } from "react-native";
 import { Colors } from "../../constants/Colors";
 import { useState } from "react";
@@ -12,12 +14,14 @@ import EyeClosedIcon from "../../assets/icons/eye_closed.svg";
 
 export function Input({
   isPassword,
+  // styleView,
+  styleView,
   ...props
-}: TextInputProps & { isPassword?: boolean }) {
+}: TextInputProps & { isPassword?: boolean; styleView: StyleProp<ViewStyle> }) {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   return (
-    <View>
+    <View style={styleView}>
       <TextInput
         style={styles.input}
         // placeholderTextColor={Colors.light.placeholderTextColor}

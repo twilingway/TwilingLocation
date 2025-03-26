@@ -43,6 +43,12 @@
             "image": "./assets/images/cargpsalfa.png"
           }
         }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
       ]
     ],
     "packagerOpts": {
