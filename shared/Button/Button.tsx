@@ -12,6 +12,7 @@ import { Colors } from "../../constants/Colors";
 export function Button({
   title,
   isLoading,
+  disabled,
   ...props
 }: PressableProps & { title: string; isLoading?: boolean }) {
   const animatedValue = new Animated.Value(100);
@@ -49,11 +50,12 @@ export function Button({
       {...props}
       onPressIn={handleOnPressIn}
       onPressOut={handleOnPressOut}
+      disabled={disabled}
     >
       <Animated.View
         style={{
           ...styles.button,
-          backgroundColor: color,
+          backgroundColor: !disabled ? color : Colors.light.disableColor,
         }}
       >
         {isLoading && (
@@ -76,5 +78,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: Colors.light.text,
+    paddingHorizontal: 8,
   },
 });

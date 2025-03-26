@@ -71,6 +71,7 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
       type: "image/jpeg",
     });
     try {
+      console.log(" FILE_API.uploadImage, :>> ", FILE_API.uploadImage);
       const { data } = await axios.post<IUploadResponse>(
         FILE_API.uploadImage,
         formData,
@@ -80,6 +81,7 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
           },
         }
       );
+      console.log("uploadToServer :>> ", data);
       return data.urls.original;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     gap: 8,
-    // backgroundColor: Colors.light.inputBackgroundColor,
+    backgroundColor: Colors.light.inputBackgroundColor,
     borderRadius: 10,
     paddingHorizontal: 20,
     paddingVertical: 16,

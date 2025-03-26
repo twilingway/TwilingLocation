@@ -19,6 +19,7 @@ export const Colors = {
     placeholderTextColor: "#2d5024",
     primary: "#91f575",
     primaryHover: "#81d869",
+    disableColor: "#96a193",
   },
   dark: {
     text: "#ECEDEE",

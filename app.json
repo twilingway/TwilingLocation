@@ -3,8 +3,8 @@
     "name": "TwilingLocation",
     "slug": "TwilingLocation",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "orientation": ["portrait", "landscape"],
+    "icon": "./assets/images/cargpsalfa.png",
     "scheme": "twiling-location-app-scheme",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,8 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/splash-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/cargpsalfa.png",
+        "backgroundColor": "#d7d5d5"
       },
       "package": "ru.twiling.location"
     },
@@ -28,10 +28,20 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 300,
+          "image": "./assets/images/cargpsalfa.png",
+          "dark": {
+            "image": "./assets/images/cargpsblack.png",
+            "backgroundColor": "#000000"
+          },
+          "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#30b024",
+          "android": {
+            "scaleType": "CENTER_CROP",
+            "adaptiveIcon": false,
+            "backgroundColor": "#000000",
+            "image": "./assets/images/cargpsalfa.png"
+          }
         }
       ]
     ],
