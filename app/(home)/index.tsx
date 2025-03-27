@@ -8,6 +8,14 @@ import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 // import * as TaskManager from "expo-task-manager";
 import Mapbox from "@rnmapbox/maps";
+import Constants from "expo-constants";
+import { MapView } from "@maplibre/maplibre-react-native";
+
+const token = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
+console.log("token :>> ", token);
+if (token) {
+  Mapbox.setAccessToken(token);
+}
 
 export default function MyCourses() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -63,7 +71,8 @@ export default function MyCourses() {
 
   return (
     <View style={styles.container}>
-      <Mapbox.MapView style={styles.map} />
+      {/* <Mapbox.MapView style={styles.map} /> */}
+      <MapView style={{ flex: 1 }} />;
       {/* <MapLibreDOMComponent
         location={location}
         dom={{

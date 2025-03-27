@@ -3,6 +3,9 @@
     "name": "TwilingLocation",
     "slug": "TwilingLocation",
     "version": "1.0.0",
+    "extra": {
+      "mapBoxAccessToken": "${process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN}"
+    },
     "orientation": ["portrait", "landscape"],
     "icon": "./assets/images/cargpsalfa.png",
     "scheme": "twiling-location-app-scheme",
@@ -12,8 +15,8 @@
       "supportsTablet": true
     },
     "android": {
-      "minSdkVersion": 31,
-      "targetSdkVersion": 31,
+      "minSdkVersion": 29,
+      "targetSdkVersion": 29,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/cargpsalfa.png",
         "backgroundColor": "#d7d5d5"
@@ -56,7 +59,7 @@
       [
         "@rnmapbox/maps",
         {
-          "RNMapboxMapsDownloadToken": "pk.eyJ1IjoibmVseWFwayIsImEiOiJjazZiMnBjd2swZGxkM290aXduMTJyYTNiIn0.EdhFId1vfZYLd3HC_iJuow"
+          "RNMapboxMapsDownloadToken": "${process.env.EXPO_PUBLIC_RN_MAPBOX_MAPS_DOWNLOAD_TOKEN}"
         }
       ]
     ],

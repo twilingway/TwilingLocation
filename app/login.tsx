@@ -17,8 +17,15 @@ import { Notification } from "../shared/Notification/Notification";
 import cargps from "../assets/images/cargps.png";
 import { useScreenOrientation } from "@/shared/hooks/useScreenOrientation";
 import { Orientation } from "expo-screen-orientation";
+import Constants from "expo-constants";
 
 export default function Login() {
+  const token = Constants.expoConfig?.extra?.mapBoxAccessToken;
+  console.log("token :>> ", token);
+
+  const token2 = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
+  console.log("token2 :>> ", token2);
+
   const [localError, setLocalError] = useState<string | undefined>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
