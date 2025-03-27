@@ -12,6 +12,8 @@
       "supportsTablet": true
     },
     "android": {
+      "minSdkVersion": 31,
+      "targetSdkVersion": 31,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/cargpsalfa.png",
         "backgroundColor": "#d7d5d5"
@@ -48,6 +50,13 @@
         "expo-screen-orientation",
         {
           "initialOrientation": "DEFAULT"
+        }
+      ],
+      ["@maplibre/maplibre-react-native"],
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "pk.eyJ1IjoibmVseWFwayIsImEiOiJjazZiMnBjd2swZGxkM290aXduMTJyYTNiIn0.EdhFId1vfZYLd3HC_iJuow"
         }
       ]
     ],

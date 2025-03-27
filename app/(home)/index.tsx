@@ -7,6 +7,7 @@ import MapLibreDOMComponent from "../../entities/maplibre/ui/MapLibre";
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 // import * as TaskManager from "expo-task-manager";
+import Mapbox from "@rnmapbox/maps";
 
 export default function MyCourses() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -62,12 +63,13 @@ export default function MyCourses() {
 
   return (
     <View style={styles.container}>
-      <MapLibreDOMComponent
+      <Mapbox.MapView style={styles.map} />
+      {/* <MapLibreDOMComponent
         location={location}
         dom={{
           scrollEnabled: false,
         }}
-      />
+      /> */}
       <Text>Координаты: {text}</Text>
       {location && location.timestamp && (
         <Text>Время: {new Date(location?.timestamp).toLocaleString()}</Text>
@@ -83,5 +85,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // marginTop: Constants.statusBarHeight,
+  },
+  map: {
+    flex: 1,
   },
 });

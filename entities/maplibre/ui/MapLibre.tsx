@@ -18,6 +18,7 @@ export default function MapLibreDOMComponent({
   const { height } = useWindowDimensions();
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<maplibregl.Map | null>(null);
+  console.log("MapLibreDOMComponent :>> ", MapLibreDOMComponent);
 
   useEffect(() => {
     if (!map.current && mapContainer.current) {
@@ -68,18 +69,20 @@ export default function MapLibreDOMComponent({
   }, [location, iconUrl]);
 
   return (
-    <>
-      <div
-        id="mapLibre"
-        ref={mapContainer}
-        style={{ ...styles.container, height: height }}
-      />
-      {/* <img src={markerIcon.uri} style={styles.image} /> */}
-    </>
+    // <div style={styles.div}>
+    <div
+      id="mapLibre"
+      ref={mapContainer}
+      style={{ ...styles.container, height: height }}
+    />
+    // </div>
   );
 }
 
 const styles = StyleSheet.create({
+  // div: {
+  //   height: 500,
+  // },
   container: {
     flex: 1,
     width: "100%",
@@ -87,6 +90,8 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
+    top: 100,
+    left: 100,
     width: 100,
     height: 100,
   },
