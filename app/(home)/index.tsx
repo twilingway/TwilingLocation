@@ -8,13 +8,19 @@ import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 // import * as TaskManager from "expo-task-manager";
 import Mapbox from "@rnmapbox/maps";
-import Constants from "expo-constants";
-import { MapView } from "@maplibre/maplibre-react-native";
+
+import YaMap from "react-native-yamap";
 
 const token = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
 console.log("token :>> ", token);
 if (token) {
   Mapbox.setAccessToken(token);
+}
+
+const yandexApi = process.env.EXPO_PUBLIC_YANDEX_MAP_API;
+
+if (yandexApi) {
+  YaMap.init("e8e82a8b-01ec-49d2-8cf1-79d184f92247");
 }
 
 export default function MyCourses() {
@@ -71,14 +77,21 @@ export default function MyCourses() {
 
   return (
     <View style={styles.container}>
-      {/* <Mapbox.MapView style={styles.map} /> */}
-      <MapView style={{ flex: 1 }} />;
-      {/* <MapLibreDOMComponent
-        location={location}
-        dom={{
-          scrollEnabled: false,
+      <Mapbox.MapView style={styles.map} />
+
+      <YaMap
+        userLocationIcon={{
+          uri: "https://www.clipartmax.com/png/middle/180-1801760_pin-png.png",
         }}
-      /> */}
+        initialRegion={{
+          lat: 55.751244,
+          lon: 37.618423,
+          zoom: 10,
+          azimuth: 0,
+          // tilt: 100,
+        }}
+        style={{ flex: 1 }}
+      />
       <Text>Координаты: {text}</Text>
       {location && location.timestamp && (
         <Text>Время: {new Date(location?.timestamp).toLocaleString()}</Text>
