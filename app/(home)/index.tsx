@@ -8,19 +8,12 @@ import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 // import * as TaskManager from "expo-task-manager";
 import Mapbox from "@rnmapbox/maps";
-
 import YaMap from "react-native-yamap";
 
 const token = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
 console.log("token :>> ", token);
 if (token) {
   Mapbox.setAccessToken(token);
-}
-
-const yandexApi = process.env.EXPO_PUBLIC_YANDEX_MAP_API;
-
-if (yandexApi) {
-  YaMap.init("e8e82a8b-01ec-49d2-8cf1-79d184f92247");
 }
 
 export default function MyCourses() {

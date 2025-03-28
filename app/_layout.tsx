@@ -12,7 +12,14 @@ import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/constants/Colors";
+import YaMap from "react-native-yamap";
 
+YaMap.setLocale("ru_RU");
+
+const yandexApi = process.env.EXPO_PUBLIC_YANDEX_MAP_API;
+if (yandexApi) {
+  YaMap.init(yandexApi);
+}
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 

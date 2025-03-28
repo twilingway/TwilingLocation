@@ -21,6 +21,11 @@
         "foregroundImage": "./assets/images/cargpsalfa.png",
         "backgroundColor": "#d7d5d5"
       },
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.RECORD_AUDIO"
+      ],
       "package": "ru.twiling.location"
     },
     "web": {
@@ -60,7 +65,17 @@
         {
           "RNMapboxMapsDownloadToken": "${process.env.EXPO_PUBLIC_RN_MAPBOX_MAPS_DOWNLOAD_TOKEN}"
         }
-      ]
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 29
+          }
+        }
+      ],
+      "expo-router",
+      "expo-image-picker"
     ],
     "packagerOpts": {
       "config": "metro.config.cjs"
