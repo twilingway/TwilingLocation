@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import {
   Dimensions,
   Image,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,7 +15,7 @@ import { loginAtom } from "../entities/auth/model/auth.state";
 import { Button } from "../shared/Button/Button";
 import { CustomLink } from "../shared/CustomLink/CustomLink";
 import { Input } from "../shared/Input/Input";
-import { Notification } from "../shared/Notification/Notification";
+import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification";
 import cargps from "../assets/images/cargps.png";
 import { useScreenOrientation } from "@/shared/hooks/useScreenOrientation";
 import { Orientation } from "expo-screen-orientation";
@@ -66,8 +68,11 @@ export default function Login() {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
-        <Notification message={localError} />
-        <View style={styles.content}>
+        <ErrorNotification message={localError} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.content}
+        >
           <Text style={styles.logoTitle}>Twiling Location</Text>
           <Image source={cargps} style={styles.logo} resizeMode="cover" />
           <View style={styles.form}>
@@ -113,7 +118,7 @@ export default function Login() {
           <CustomLink href={"/restore"} text="Восстановить пароль" />
           {/* <CustomLink href={"/(home)/course/ts"} text="Course" />
         <CustomLink href={"/(home)"} text="App" /> */}
-        </View>
+        </KeyboardAvoidingView>
       </View>
     </ScrollView>
   );

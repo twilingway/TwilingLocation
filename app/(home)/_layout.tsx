@@ -1,4 +1,4 @@
-import { Redirect, SplashScreen } from "expo-router";
+import { Redirect, SplashScreen, Stack } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useAtomValue } from "jotai";
 import { StyleSheet, View } from "react-native";
@@ -70,20 +70,30 @@ export default function AppLayout() {
           // },
         })}
       >
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="index" // This is the name of the page and must match the url from root
           options={{
             // drawerLabel: "Home",
             title: "Карта",
           }}
-        />
-        <Drawer.Screen
+        /> */}
+        {/* <Drawer.Screen name="courses" options={{ title: "Курсы" }} /> */}
+        {/* <Drawer.Screen
           name="profile" // This is the name of the page and must match the url from root
           options={{
             // drawerLabel: "Home",
             title: "Профиль",
           }}
-        />
+        /> */}
+        <Stack>
+          <Stack.Screen
+            name="course/[alias]"
+            options={{
+              title: "Курс", // Заголовок страницы курса
+              headerShown: false, // Скрываем заголовок, если он уже есть в Drawer
+            }}
+          />
+        </Stack>
       </Drawer>
     </GestureHandlerRootView>
     // <SafeAreaProvider>

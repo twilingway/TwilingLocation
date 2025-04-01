@@ -12,14 +12,8 @@ import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/constants/Colors";
-import YaMap from "react-native-yamap";
+import { Notification } from "@/shared/Notification/Notification";
 
-YaMap.setLocale("ru_RU");
-
-const yandexApi = process.env.EXPO_PUBLIC_YANDEX_MAP_API;
-if (yandexApi) {
-  YaMap.init(yandexApi);
-}
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -41,6 +35,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <Notification />
       <Stack
         screenOptions={{
           //   statusBarBackgroundColor: Colors.dark.background,
@@ -53,6 +48,7 @@ export default function RootLayout() {
         }}
       >
         {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="(home)" />
         <Stack.Screen name="login" />
         <Stack.Screen
           name="restore"
@@ -60,7 +56,6 @@ export default function RootLayout() {
             presentation: "modal",
           }}
         />
-        <Stack.Screen name="(home)" />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

@@ -26,6 +26,11 @@ const MENU = [
     icon: <Ionicons name="close-circle-outline" size={50} color="" />,
     path: "profile",
   },
+  {
+    text: "Курсы",
+    icon: <Ionicons name="close-circle-outline" size={50} color="" />,
+    path: "courses",
+  },
 ];
 
 export function CustomDrawer(props: DrawerContentComponentProps) {
