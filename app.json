@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "TwilingLocation",
-    "slug": "twiling-location-app",
+    "slug": "locationtwilingru",
     "description": "Приложение для мониторинга личного автомобиля",
     "version": "1.0.0",
     "platform": ["android"],
