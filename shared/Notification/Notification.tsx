@@ -1,7 +1,10 @@
 import * as Notifications from "expo-notifications";
+import { useRouter } from "expo-router";
 import { useEffect } from "react";
 
 export function Notification() {
+  const router = useRouter();
+
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
       shouldPlaySound: true,
@@ -23,6 +26,8 @@ export function Notification() {
     const subResponseReceived =
       Notifications.addNotificationResponseReceivedListener((notification) => {
         console.log("subResponse notification :>> ", notification);
+        const alias = notification.notification.request.content.data.alias;
+        router.push(`/(home)/course/${alias}`);
       });
     return () => {
       subReceived.remove();

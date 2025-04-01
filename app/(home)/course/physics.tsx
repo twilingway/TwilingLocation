@@ -66,21 +66,21 @@ export default function MyPhysics() {
     }
     Notifications.scheduleNotificationAsync({
       content: {
-        title: "Не забудь",
-        body: "Учись",
-        data: { success: true },
+        title: "Новый курс Typescript",
+        body: "Начни учиться уже сейчас!",
+        data: { success: true, alias: "typescript" },
       },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
         seconds: 3,
       },
     });
-    // if (Device.isDevice) {
-    //   const token = await Notifications.getExpoPushTokenAsync({
-    //     projectId: Constants.expoConfig?.extra?.eas.projectId,
-    //   });
-    //   console.log("scheduleNotification", token);
-    // }
+    if (Device.isDevice) {
+      const token = await Notifications.getExpoPushTokenAsync({
+        projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+      });
+      console.log("scheduleNotification", token);
+    }
   };
 
   return (
