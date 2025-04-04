@@ -4,9 +4,16 @@
     "slug": "locationtwilingru",
     "description": "Приложение для мониторинга личного автомобиля",
     "version": "1.0.0",
-    "platform": ["android"],
-    "extra": {},
-    "orientation": ["portrait", "landscape"],
+
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "73cd1a5f-1fd0-47fc-83a3-c44cd7debb23"
+      }
+    },
+
     "icon": "./assets/images/cargpsalfa.png",
     "scheme": "twiling-location-app-scheme",
     "userInterfaceStyle": "automatic",
@@ -15,8 +22,6 @@
       "supportsTablet": true
     },
     "android": {
-      "minSdkVersion": 29,
-      "targetSdkVersion": 29,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/cargpsalfa.png",
         "backgroundColor": "#d7d5d5"
@@ -63,7 +68,7 @@
       [
         "@rnmapbox/maps",
         {
-          "RNMapboxMapsDownloadToken": "${process.env.EXPO_PUBLIC_RN_MAPBOX_MAPS_DOWNLOAD_TOKEN}"
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibmVseWFwayIsImEiOiJjbThyMWdlbmYwbmZvMmtzYWNyYnlhczNqIn0.dPATBDl5hUrrFTv0lgT2kw"
         }
       ],
       [
@@ -96,6 +101,7 @@
     },
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "owner": "twilingway"
   }
 }

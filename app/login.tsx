@@ -22,9 +22,6 @@ import { Orientation } from "expo-screen-orientation";
 import Constants from "expo-constants";
 
 export default function Login() {
-  const token = Constants.expoConfig?.extra?.mapBoxAccessToken;
-  console.log("token :>> ", token);
-
   const token2 = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
   console.log("token2 :>> ", token2);
 
@@ -113,7 +110,7 @@ export default function Login() {
               />
             </View>
 
-            <Button title="ВОЙТИ" onPress={submit} isLoading={isLoading} />
+            <Button title="ВОЙТИ2" onPress={submit} isLoading={isLoading} />
           </View>
           <CustomLink href={"/restore"} text="Восстановить пароль" />
           {/* <CustomLink href={"/(home)/course/ts"} text="Course" />

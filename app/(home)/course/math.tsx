@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+// import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import io, { Socket } from "socket.io-client";
 
-//const SOCKET_URL = "http://192.168.1.228:3000";
-const SOCKET_URL = "https://arzon.emsoft.ru"; // Замените на IP вашего сервера
+const SOCKET_URL = "http://192.168.1.228:3000";
+// const SOCKET_URL = "https://arzon.emsoft.ru"; // Замените на IP вашего сервера
 // const MESSENGER_URL = "/messenger";
-const NOTIFICATION_URL = "/notification";
+// const NOTIFICATION_URL = "/notification";
 // Типизация состояний
 interface Message {
   id: string;
@@ -28,8 +28,8 @@ export default function MathPage() {
   useEffect(() => {
     console.log("[SOCKET] Инициализация клиента...");
     const newSocket = io(SOCKET_URL, {
-      path: NOTIFICATION_URL,
-      //   transports: ["websocket"], // Указываем транспорт WebSocket
+      // path: NOTIFICATION_URL,
+      transports: ["websocket"], // Указываем транспорт WebSocket
     });
 
     setSocket(newSocket);
