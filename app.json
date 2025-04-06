@@ -4,7 +4,9 @@
     "slug": "locationtwilingru",
     "description": "Приложение для мониторинга личного автомобиля",
     "version": "1.0.0",
-
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "extra": {
       "router": {
         "origin": false
@@ -29,7 +31,9 @@
       "permissions": [
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_BACKGROUND_LOCATION",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
       ],
       "package": "ru.twiling.location"
     },

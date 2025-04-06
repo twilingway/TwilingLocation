@@ -1,25 +1,21 @@
-import { useSetAtom } from "jotai";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { logoutAtom } from "../../entities/auth/model/auth.state";
-import { Button } from "../../shared/Button/Button";
-import WebView from "react-native-webview";
-import MapLibreDOMComponent from "../../entities/maplibre/ui/MapLibre";
-import { useEffect, useState } from "react";
 import * as Location from "expo-location";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 // import * as TaskManager from "expo-task-manager";
-import Mapbox from "@rnmapbox/maps";
+// import Mapbox from "@rnmapbox/maps";
 import YandexMap from "@/entities/yandexMap/ui/YandexMap";
 
-const token = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
-console.log("token :>> ", token);
-if (token) {
-  Mapbox.setAccessToken(token);
-}
+// const token = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
+// console.log("token :>> ", token);
+// if (token) {
+//   Mapbox.setAccessToken(token);
+// }
 
 export default function MyCourses() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
+
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
@@ -68,10 +64,14 @@ export default function MyCourses() {
     // console.log("location :>> ", location);
   }
 
+  console.log("text :>> ", text);
+  if (location) {
+    console.log("Время :>> ", new Date(location?.timestamp).toLocaleString());
+  }
   return (
     <View style={styles.container}>
       {/* <Mapbox.MapView style={styles.map} /> */}
-      <YandexMap />
+      <YandexMap location={location} />
       <Text>Координаты: {text}</Text>
       {location && location.timestamp && (
         <Text>Время: {new Date(location?.timestamp).toLocaleString()}</Text>

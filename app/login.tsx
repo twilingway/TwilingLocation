@@ -1,4 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
+import { useScreenOrientation } from "@/shared/hooks/useScreenOrientation";
 import { router } from "expo-router";
+import { Orientation } from "expo-screen-orientation";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import {
@@ -11,19 +14,56 @@ import {
   Text,
   View,
 } from "react-native";
+import cargps from "../assets/images/cargps.png";
 import { loginAtom } from "../entities/auth/model/auth.state";
 import { Button } from "../shared/Button/Button";
 import { CustomLink } from "../shared/CustomLink/CustomLink";
-import { Input } from "../shared/Input/Input";
 import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification";
-import cargps from "../assets/images/cargps.png";
-import { useScreenOrientation } from "@/shared/hooks/useScreenOrientation";
-import { Orientation } from "expo-screen-orientation";
-import Constants from "expo-constants";
+import { Input } from "../shared/Input/Input";
+
+import * as Location from "expo-location";
+import * as TaskManager from "expo-task-manager";
+
+const LOCATION_TASK_NAME = "background-location-task";
+
+// Типизация данных геолокации
+type LocationData = {
+  latitude: number;
+  longitude: number;
+  timestamp: number;
+};
+
+// Фоновая задача
+TaskManager.defineTask<Location.LocationData>(
+  LOCATION_TASK_NAME,
+  ({ data, error }) => {
+    if (error) {
+      console.error("Ошибка фоновой задачи:", error);
+      return;
+    }
+    if (data) {
+      const { latitude, longitude } = data.locations[0].coords;
+      const locationData: LocationData = {
+        latitude,
+        longitude,
+        timestamp: Date.now(),
+      };
+      // Сохраняем данные в AsyncStorage
+      AsyncStorage.getItem("locations")
+        .then((value) => {
+          const locations = value ? JSON.parse(value) : [];
+          locations.push(locationData);
+          return AsyncStorage.setItem("locations", JSON.stringify(locations));
+        })
+        .catch((err) => console.error("Ошибка сохранения:", err));
+    }
+  }
+);
 
 export default function Login() {
-  const token2 = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
-  console.log("token2 :>> ", token2);
+  // const token2 = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;
+  // console.log("token2 :>> ", token2);
+  const [status, setStatus] = React.useState<string>("");
 
   const [localError, setLocalError] = useState<string | undefined>();
   const [email, setEmail] = useState<string>();
@@ -58,10 +98,48 @@ export default function Login() {
   }, [error]);
 
   useEffect(() => {
+    const startBackgroundLocation = async () => {
+      try {
+        // Запрос разрешений
+        const { status: foregroundStatus } =
+          await Location.requestForegroundPermissionsAsync();
+        if (foregroundStatus !== "granted") {
+          setStatus("Разрешение на геолокацию отклонено");
+          return;
+        }
+
+        const { status: backgroundStatus } =
+          await Location.requestBackgroundPermissionsAsync();
+        if (backgroundStatus !== "granted") {
+          setStatus("Разрешение на фоновую геолокацию отклонено");
+          return;
+        }
+
+        // Запуск фонового отслеживания
+        await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+          accuracy: Location.Accuracy.High,
+          timeInterval: 5000, // Каждые 5 секунд
+          distanceInterval: 10, // Каждые 10 метров
+          foregroundService: {
+            notificationTitle: "GPS активен",
+            notificationBody: "Приложение работает в фоне",
+          },
+        });
+        setStatus("Отслеживание запущено");
+      } catch (error) {
+        setStatus(`Ошибка: ${error.message}`);
+      }
+    };
+
+    startBackgroundLocation();
+  }, []);
+
+  useEffect(() => {
     if (accessToken) {
       router.replace("/(home)");
     }
   }, [accessToken]);
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
@@ -154,10 +232,10 @@ const styles = StyleSheet.create({
     gap: 16,
     // flexDirection: "column",
   },
-  input: {
-    // width: "auto",
-    flex: 1,
-  },
+  // input: {
+  //   // width: "auto",
+  //   flex: 1,
+  // },
   // inputPortrait: {
   //   width: Dimensions.get("window").width / 2 - 16,
   // },

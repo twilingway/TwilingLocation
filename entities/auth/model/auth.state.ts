@@ -30,7 +30,7 @@ export const loginAtom = atom(
   async (_get, set, { email, password }: ILoginRequest) => {
     set(authAtom, {
       isLoading: true,
-      accessToken: null,
+      accessToken: "1213",
       error: null,
     });
 

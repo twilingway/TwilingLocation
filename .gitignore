@@ -2,7 +2,11 @@
 
 # dependencies
 node_modules/
-android/
+android/.gradle/
+android/.idea/
+android/build/
+android/app/build/
+android/app/debug.keystore
 ios/
 
 # Expo
