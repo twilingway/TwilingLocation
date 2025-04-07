@@ -30,12 +30,17 @@
       },
       "permissions": [
         "android.permission.ACCESS_FINE_LOCATION",
-        "android.permission.ACCESS_BACKGROUND_LOCATION",
         "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.RECEIVE_BOOT_COMPLETED"
       ],
-      "package": "ru.twiling.location"
+      "package": "ru.twiling.location",
+      "config": {
+        "googleMaps": {
+          "apiKey": "process.env.GOOGLE_MAPS_API_KEY"
+        }
+      }
     },
     "web": {
       "bundler": "metro",
@@ -44,6 +49,13 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibmVseWFwayIsImEiOiJjbThyMWdlbmYwbmZvMmtzYWNyYnlhczNqIn0.dPATBDl5hUrrFTv0lgT2kw",
+          "locationWhenInUsePermission": "Разрешите приложению доступ к местоположению"
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -67,12 +79,6 @@
         "expo-screen-orientation",
         {
           "initialOrientation": "DEFAULT"
-        }
-      ],
-      [
-        "@rnmapbox/maps",
-        {
-          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibmVseWFwayIsImEiOiJjbThyMWdlbmYwbmZvMmtzYWNyYnlhczNqIn0.dPATBDl5hUrrFTv0lgT2kw"
         }
       ],
       [
